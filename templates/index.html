@@ -1,20 +1,73 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Food App</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DelishDash - Order Food Anytime, Anywhere</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        * { font-family: 'Poppins', system-ui, sans-serif; }
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), 
+                             url('https://images.unsplash.com/photo-1565958011703-44f5a3a4b5b2');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
 </head>
-<body class="bg-dark text-white text-center">
+<body>
+    <div class="hero-bg min-h-screen flex flex-col text-white">
+        <!-- Navbar -->
+        <nav class="bg-white/10 backdrop-blur-md border-b border-white/20 px-8 py-6 flex items-center justify-between sticky top-0 z-50">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-[#ff4d4d] rounded-3xl flex items-center justify-center text-3xl">🍽️</div>
+                <h1 class="text-3xl font-bold tracking-tighter">DelishDash</h1>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="{{ url_for('login') }}" class="font-medium hover:text-[#ff4d4d] transition">Login</a>
+                <a href="{{ url_for('register') }}" 
+                   class="bg-white text-[#ff4d4d] px-8 py-3 rounded-3xl font-semibold hover:shadow-xl transition">
+                    Get Started
+                </a>
+            </div>
+        </nav>
 
-<div class="container mt-5">
-    <h1 class="display-4">🍔 Food Ordering System</h1>
-    <p class="lead">Order your favorite food easily</p>
+        <!-- Hero -->
+        <div class="flex-1 flex items-center justify-center px-6 text-center">
+            <div class="max-w-4xl">
+                <h1 class="text-6xl md:text-7xl font-bold tracking-tighter leading-none mb-6">
+                    Order Food<br>Anytime, Anywhere
+                </h1>
+                <p class="text-2xl text-white/90 mb-10">
+                    Delicious meals from top restaurants delivered fast to your doorstep
+                </p>
+                <div class="flex flex-col sm:flex-row gap-5 justify-center">
+                    <a href="{{ url_for('login') }}" 
+                       class="bg-[#ff4d4d] hover:bg-[#e63f3f] text-white text-xl font-semibold px-10 py-6 rounded-3xl transition flex items-center justify-center gap-3">
+                        <i class="fas fa-sign-in-alt"></i> Login to Order
+                    </a>
+                    <a href="{{ url_for('register') }}" 
+                       class="bg-white text-[#ff4d4d] text-xl font-semibold px-10 py-6 rounded-3xl transition flex items-center justify-center gap-3">
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </a>
+                </div>
+            </div>
+        </div>
 
-    <a href="/login" class="btn btn-danger m-2">Login</a>
-    <a href="/register" class="btn btn-outline-light m-2">Register</a>
-</div>
-
+        <!-- Trust Bar -->
+        <div class="bg-white/10 backdrop-blur py-5 text-center flex flex-wrap justify-center gap-8 text-sm">
+            <div><i class="fas fa-truck-fast mr-2"></i>30-min Delivery</div>
+            <div><i class="fas fa-shield-alt mr-2"></i>Secure Payment</div>
+            <div><i class="fas fa-star mr-2"></i>4.9 Rating</div>
+        </div>
+    </div>
 </body>
 </html>
+
+
+
 
 

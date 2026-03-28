@@ -1,21 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login • DelishDash</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        * { font-family: 'Poppins', system-ui, sans-serif; }
+    </style>
 </head>
-<body class="bg-dark text-white">
+<body class="bg-gradient-to-br from-zinc-100 to-white min-h-screen flex items-center justify-center p-6">
+    <div class="max-w-md w-full">
+        <div class="flex justify-center mb-10">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-[#ff4d4d] rounded-3xl flex items-center justify-center text-4xl">🍽️</div>
+                <h1 class="text-4xl font-bold tracking-tighter text-neutral-900">DelishDash</h1>
+            </div>
+        </div>
 
-<div class="container mt-5 col-md-4">
-    <h2 class="text-center">Login</h2>
+        <div class="bg-white rounded-3xl shadow-2xl p-10">
+            <h2 class="text-3xl font-semibold text-center mb-2">Welcome Back</h2>
+            <p class="text-neutral-500 text-center mb-8">Sign in to continue ordering</p>
 
-    <form method="POST">
-        <input class="form-control mb-3" type="text" name="username" placeholder="Username">
-        <input class="form-control mb-3" type="password" name="password" placeholder="Password">
-        <button class="btn btn-danger w-100">Login</button>
-    </form>
+            <form action="{{ url_for('login') }}" method="POST" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-medium mb-2 text-neutral-600">Email or Phone</label>
+                    <input type="text" name="username" 
+                           class="w-full px-6 py-4 border border-neutral-200 rounded-3xl focus:outline-none focus:border-[#ff4d4d] focus:ring-2 focus:ring-[#ff4d4d]/20"
+                           placeholder="you@email.com" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-2 text-neutral-600">Password</label>
+                    <input type="password" name="password" 
+                           class="w-full px-6 py-4 border border-neutral-200 rounded-3xl focus:outline-none focus:border-[#ff4d4d] focus:ring-2 focus:ring-[#ff4d4d]/20"
+                           placeholder="••••••••" required>
+                </div>
 
-</div>
+                <button type="submit"
+                        class="w-full bg-[#ff4d4d] hover:bg-[#e63f3f] text-white py-5 rounded-3xl font-semibold text-lg transition">
+                    Login
+                </button>
+            </form>
 
+            <p class="text-center text-sm text-neutral-500 mt-8">
+                Don't have an account? 
+                <a href="{{ url_for('register') }}" class="text-[#ff4d4d] font-semibold">Sign up</a>
+            </p>
+        </div>
+    </div>
 </body>
 </html>
+
