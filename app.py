@@ -4,12 +4,21 @@ from db import users, menu, orders
 app = Flask(__name__)
 app.secret_key = "secret123"
 
-# ---------------- HOME ----------------
+# -------- INSERT MENU (RUNS ONCE) --------
+if menu.count_documents({}) == 0:
+    menu.insert_many([
+        {"name": "Burger", "price": 120},
+        {"name": "Pizza", "price": 250},
+        {"name": "Pasta", "price": 180},
+        {"name": "Sandwich", "price": 100}
+    ])
+
+# -------- HOME --------
 @app.route("/")
 def home():
     return render_template("index.html")
 
-# ---------------- REGISTER ----------------
+# -------- REGISTER --------
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -24,7 +33,7 @@ def register():
 
     return render_template("register.html")
 
-# ---------------- LOGIN ----------------
+# -------- LOGIN --------
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -41,13 +50,16 @@ def login():
 
     return render_template("login.html")
 
-# ---------------- MENU ----------------
+# -------- MENU --------
 @app.route("/menu")
 def view_menu():
+    if "user" not in session:
+        return redirect("/login")
+
     items = list(menu.find())
     return render_template("menu.html", items=items)
 
-# ---------------- ORDER ----------------
+# -------- ORDER --------
 @app.route("/order", methods=["POST"])
 def place_order():
     if "user" not in session:
@@ -64,19 +76,22 @@ def place_order():
             cart.append(item)
             total += item["price"]
 
-    orders.insert_one({
-        "username": session["user"],
-        "items": cart,
-        "total": total
-    })
+    if cart:
+        orders.insert_one({
+            "username": session["user"],
+            "items": cart,
+            "total": total
+        })
 
     return render_template("order.html", total=total)
 
-# ---------------- LOGOUT ----------------
+# -------- LOGOUT --------
 @app.route("/logout")
 def logout():
     session.pop("user", None)
     return redirect("/")
 
+# -------- RUN --------
 if __name__ == "__main__":
     app.run(debug=True)
+    

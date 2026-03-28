@@ -1,12 +1,23 @@
-<h2>Menu</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menu</title>
+</head>
+<body>
+    <h2>Menu</h2>
 
-<form method="POST" action="/order">
-  {% for item in items %}
-    <input type="checkbox" name="items" value="{{ item.name }}">
-    {{ item.name }} - ₹{{ item.price }} <br>
-  {% endfor %}
+    <form method="POST" action="/order">
+        {% for item in items %}
+            <input type="checkbox" name="items" value="{{ item.name }}">
+            {{ item.name }} - ₹{{ item.price }} <br>
+        {% endfor %}
 
-  <button type="submit">Place Order</button>
-</form>
+        <br>
+        <button type="submit">Place Order</button>
+    </form>
 
-<a href="/logout">Logout</a>
+    <br>
+    <a href="/logout">Logout</a>
+</body>
+</html>
+
