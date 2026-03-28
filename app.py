@@ -10,52 +10,53 @@ MENU_ITEMS = [
     {
         "id": 1,
         "name": "Veg Biryani",
-        "description": "Fragrant basmati rice cooked with mixed vegetables and aromatic spices",
+        "description": "Fragrant basmati rice cooked with fresh vegetables and aromatic spices",
         "price": 219,
-        "image_url": "https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=800",
+        "image_url": "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800",  # Proper Veg Biryani
         "category": "indian"
     },
     {
         "id": 2,
-        "name": "Margherita Pizza",
-        "description": "Classic pizza with fresh mozzarella, basil, and tangy tomato sauce",
-        "price": 349,
-        "image_url": "https://images.unsplash.com/photo-1604382355076-e894e0e3d8d3",   # Fixed
-        "category": "pizza"
-    },
-    {
-        "id": 3,
         "name": "Cheeseburger with Fries",
-        "description": "Juicy veg patty with melted cheese, fresh veggies & crispy fries",
+        "description": "Juicy beef patty with melted cheese, fresh veggies & crispy fries",
         "price": 189,
-        "image_url": "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=800",   # Fixed
+        "image_url": "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=800",
         "category": "burger"
     },
     {
-        "id": 4,
+        "id": 3,
         "name": "Paneer Butter Masala",
-        "description": "Cottage cheese cubes in rich creamy tomato gravy",
+        "description": "Cottage cheese cubes simmered in rich creamy tomato gravy",
         "price": 229,
-        "image_url": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7",
+        "image_url": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=800",
         "category": "indian"
     },
     {
-        "id": 5,
+        "id": 4,
         "name": "Veg Avocado Bowl",
-        "description": "Healthy quinoa bowl with avocado, grilled veggies & tahini dressing",
+        "description": "Healthy quinoa bowl with avocado, grilled vegetables & tahini dressing",
         "price": 279,
-        "image_url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd",
+        "image_url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800",
         "category": "healthy"
     },
     {
+        "id": 5,
+        "name": "Veg Fried Rice",
+        "description": "Stir-fried rice with fresh vegetables, spring onions and soy sauce",
+        "price": 179,
+        "image_url": "https://images.unsplash.com/photo-1603138461772-6e9b0c3e5e4e?w=800",
+        "category": "indian"
+    },
+    {
         "id": 6,
-        "name": "Pepperoni Pizza",
-        "description": "Spicy pepperoni with extra cheese on thin crust",
-        "price": 399,
-        "image_url": "https://images.unsplash.com/photo-1590947132387-155cc02f3212?w=800",
-        "category": "pizza"
+        "name": "Mushroom Masala",
+        "description": "Fresh mushrooms cooked in spicy onion-tomato gravy",
+        "price": 199,
+        "image_url": "https://images.unsplash.com/photo-1630409357623-0b5e2b9f8f3f?w=800",
+        "category": "indian"
     }
 ]
+
 
 @app.route('/')
 def index():
