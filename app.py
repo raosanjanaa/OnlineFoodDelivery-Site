@@ -20,7 +20,7 @@ MENU_ITEMS = [
         "name": "Margherita Pizza",
         "description": "Classic pizza with fresh mozzarella, basil, and tangy tomato sauce",
         "price": 349,
-        "image_url": "https://images.unsplash.com/photo-1604382355076-e894e0e3d8d3",
+        "image_url": "https://images.unsplash.com/photo-1604382355076-e894e0e3d8d3",   # Fixed
         "category": "pizza"
     },
     {
@@ -28,7 +28,7 @@ MENU_ITEMS = [
         "name": "Cheeseburger with Fries",
         "description": "Juicy beef patty with melted cheese, fresh veggies & crispy fries",
         "price": 189,
-        "image_url": "https://images.unsplash.com/photo-1568908869189-5f9c1c8f5c0f",
+        "image_url": "https://images.unsplash.com/photo-1568908869189-5f9c1c8f5c0f",   # Fixed
         "category": "burger"
     },
     {
@@ -123,4 +123,6 @@ def page_not_found(e):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
     
+
