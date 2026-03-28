@@ -9,10 +9,10 @@ app.secret_key = 'delishdash_secret_key_2026'  # Change this in production
 MENU_ITEMS = [
     {
         "id": 1,
-        "name": "Hyderabadi Chicken Biryani",
-        "description": "Fragrant basmati rice cooked with tender chicken and aromatic spices",
-        "price": 249,
-        "image_url": "https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a",
+        "name": "Veg Biryani",
+        "description": "Fragrant basmati rice cooked with mixed vegetables and aromatic spices",
+        "price": 219,
+        "image_url": "https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=800",
         "category": "indian"
     },
     {
@@ -28,7 +28,7 @@ MENU_ITEMS = [
         "name": "Cheeseburger with Fries",
         "description": "Juicy beef patty with melted cheese, fresh veggies & crispy fries",
         "price": 189,
-        "image_url": "https://images.unsplash.com/photo-1568908869189-5f9c1c8f5c0f",   # Fixed
+        "image_url": "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=800",   # Fixed
         "category": "burger"
     },
     {
@@ -52,7 +52,7 @@ MENU_ITEMS = [
         "name": "Pepperoni Pizza",
         "description": "Spicy pepperoni with extra cheese on thin crust",
         "price": 399,
-        "image_url": "https://images.unsplash.com/photo-1628840042765-356cda07504e",
+        "image_url": "https://images.unsplash.com/photo-1590947132387-155cc02f3212?w=800",
         "category": "pizza"
     }
 ]
