@@ -1,97 +1,126 @@
-from flask import Flask, render_template, request, redirect, session
-from db import users, menu, orders
+from flask import Flask, render_template, request, redirect, url_for, flash, session
+import sqlite3
+from datetime import datetime
 
 app = Flask(__name__)
-app.secret_key = "secret123"
+app.secret_key = 'delishdash_secret_key_2026'  # Change this in production
 
-# -------- INSERT MENU (RUNS ONCE) --------
-if menu.count_documents({}) == 0:
-    menu.insert_many([
-        {"name": "Burger", "price": 120},
-        {"name": "Pizza", "price": 250},
-        {"name": "Pasta", "price": 180},
-        {"name": "Sandwich", "price": 100}
-    ])
+# Sample Menu Data (In real project, use Database)
+MENU_ITEMS = [
+    {
+        "id": 1,
+        "name": "Hyderabadi Chicken Biryani",
+        "description": "Fragrant basmati rice cooked with tender chicken and aromatic spices",
+        "price": 249,
+        "image_url": "https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a",
+        "category": "indian"
+    },
+    {
+        "id": 2,
+        "name": "Margherita Pizza",
+        "description": "Classic pizza with fresh mozzarella, basil, and tangy tomato sauce",
+        "price": 349,
+        "image_url": "https://images.unsplash.com/photo-1604382355076-e894e0e3d8d3",
+        "category": "pizza"
+    },
+    {
+        "id": 3,
+        "name": "Cheeseburger with Fries",
+        "description": "Juicy beef patty with melted cheese, fresh veggies & crispy fries",
+        "price": 189,
+        "image_url": "https://images.unsplash.com/photo-1568908869189-5f9c1c8f5c0f",
+        "category": "burger"
+    },
+    {
+        "id": 4,
+        "name": "Paneer Butter Masala",
+        "description": "Cottage cheese cubes in rich creamy tomato gravy",
+        "price": 229,
+        "image_url": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7",
+        "category": "indian"
+    },
+    {
+        "id": 5,
+        "name": "Veg Avocado Bowl",
+        "description": "Healthy quinoa bowl with avocado, grilled veggies & tahini dressing",
+        "price": 279,
+        "image_url": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd",
+        "category": "healthy"
+    },
+    {
+        "id": 6,
+        "name": "Pepperoni Pizza",
+        "description": "Spicy pepperoni with extra cheese on thin crust",
+        "price": 399,
+        "image_url": "https://images.unsplash.com/photo-1628840042765-356cda07504e",
+        "category": "pizza"
+    }
+]
 
-# -------- HOME --------
-@app.route("/")
-def home():
-    return render_template("index.html")
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-# -------- REGISTER --------
-@app.route("/register", methods=["GET", "POST"])
-def register():
-    if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
-
-        if users.find_one({"username": username}):
-            return "User already exists!"
-
-        users.insert_one({"username": username, "password": password})
-        return redirect("/login")
-
-    return render_template("register.html")
-
-# -------- LOGIN --------
-@app.route("/login", methods=["GET", "POST"])
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
-
-        user = users.find_one({"username": username, "password": password})
-
-        if user:
-            session["user"] = username
-            return redirect("/menu")
+    if request.method == 'POST':
+        # In real app, add proper authentication here
+        email = request.form.get('username')
+        password = request.form.get('password')
+        
+        if email and password:  # Simple validation
+            session['user'] = email
+            flash('Login successful!', 'success')
+            return redirect(url_for('menu'))
         else:
-            return "Invalid credentials!"
+            flash('Please enter email and password', 'error')
+    
+    return render_template('login.html')
 
-    return render_template("login.html")
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        # In real app, save user to database
+        flash('Account created successfully! Please login.', 'success')
+        return redirect(url_for('login'))
+    
+    return render_template('register.html')
 
-# -------- MENU --------
-@app.route("/menu")
-def view_menu():
-    if "user" not in session:
-        return redirect("/login")
+@app.route('/menu')
+def menu():
+    if 'user' not in session:
+        flash('Please login to view menu', 'warning')
+        return redirect(url_for('login'))
+    
+    return render_template('menu.html', menu_items=MENU_ITEMS)
 
-    items = list(menu.find())
-    return render_template("menu.html", items=items)
+@app.route('/order', methods=['GET', 'POST'])
+def order():
+    if 'user' not in session:
+        return redirect(url_for('login'))
+    
+    # For demo, we generate a random order ID
+    import random
+    order_id = f"DD{random.randint(100000, 999999)}"
+    
+    # In real app, you would calculate total from cart stored in session or DB
+    total = 598  # Demo total
+    
+    return render_template('order.html', 
+                         order_id=order_id, 
+                         total=total)
 
-# -------- ORDER --------
-@app.route("/order", methods=["POST"])
-def place_order():
-    if "user" not in session:
-        return redirect("/login")
-
-    selected_items = request.form.getlist("items")
-
-    cart = []
-    total = 0
-
-    for item_name in selected_items:
-        item = menu.find_one({"name": item_name})
-        if item:
-            cart.append(item)
-            total += item["price"]
-
-    if cart:
-        orders.insert_one({
-            "username": session["user"],
-            "items": cart,
-            "total": total
-        })
-
-    return render_template("order.html", total=total)
-
-# -------- LOGOUT --------
-@app.route("/logout")
+@app.route('/logout')
 def logout():
-    session.pop("user", None)
-    return redirect("/")
+    session.pop('user', None)
+    flash('Logged out successfully', 'info')
+    return redirect(url_for('index'))
 
-# -------- RUN --------
-if __name__ == "__main__":
+# Error handlers (Optional but recommended)
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('index.html'), 404
+
+if __name__ == '__main__':
     app.run(debug=True)
     
