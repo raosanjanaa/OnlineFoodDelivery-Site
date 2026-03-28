@@ -26,7 +26,7 @@ MENU_ITEMS = [
     {
         "id": 3,
         "name": "Cheeseburger with Fries",
-        "description": "Juicy beef patty with melted cheese, fresh veggies & crispy fries",
+        "description": "Juicy veg patty with melted cheese, fresh veggies & crispy fries",
         "price": 189,
         "image_url": "https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=800",   # Fixed
         "category": "burger"
@@ -64,18 +64,19 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        # In real app, add proper authentication here
-        email = request.form.get('username')
+        username = request.form.get('username')
         password = request.form.get('password')
         
-        if email and password:  # Simple validation
-            session['user'] = email
-            flash('Login successful!', 'success')
+        if username and password:
+            # For demo - in real app, check against database
+            session['user'] = username
+            flash(f'Welcome back, {username}!', 'success')
             return redirect(url_for('menu'))
         else:
-            flash('Please enter email and password', 'error')
+            flash('Please enter username and password', 'error')
     
     return render_template('login.html')
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():

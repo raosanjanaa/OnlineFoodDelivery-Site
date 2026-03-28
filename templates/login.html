@@ -14,6 +14,7 @@
 </head>
 <body class="bg-gradient-to-br from-zinc-100 to-white min-h-screen flex items-center justify-center p-6">
     <div class="max-w-md w-full">
+        <!-- Logo -->
         <div class="flex justify-center mb-10">
             <div class="flex items-center gap-3">
                 <div class="w-12 h-12 bg-[#ff4d4d] rounded-3xl flex items-center justify-center text-4xl">🍽️</div>
@@ -21,36 +22,51 @@
             </div>
         </div>
 
+        <!-- Login Card -->
         <div class="bg-white rounded-3xl shadow-2xl p-10">
             <h2 class="text-3xl font-semibold text-center mb-2">Welcome Back</h2>
-            <p class="text-neutral-500 text-center mb-8">Sign in to continue ordering</p>
+            <p class="text-neutral-500 text-center mb-8">Sign in to continue ordering delicious food</p>
 
             <form action="{{ url_for('login') }}" method="POST" class="space-y-6">
                 <div>
-                    <label class="block text-sm font-medium mb-2 text-neutral-600">Email or Phone</label>
+                    <label class="block text-sm font-medium mb-2 text-neutral-600">Username</label>
                     <input type="text" name="username" 
-                           class="w-full px-6 py-4 border border-neutral-200 rounded-3xl focus:outline-none focus:border-[#ff4d4d] focus:ring-2 focus:ring-[#ff4d4d]/20"
-                           placeholder="you@email.com" required>
+                           class="w-full px-6 py-4 border border-neutral-200 rounded-3xl focus:outline-none focus:border-[#ff4d4d] focus:ring-2 focus:ring-[#ff4d4d]/20 text-lg"
+                           placeholder="Enter your username" required>
                 </div>
+
                 <div>
                     <label class="block text-sm font-medium mb-2 text-neutral-600">Password</label>
                     <input type="password" name="password" 
-                           class="w-full px-6 py-4 border border-neutral-200 rounded-3xl focus:outline-none focus:border-[#ff4d4d] focus:ring-2 focus:ring-[#ff4d4d]/20"
+                           class="w-full px-6 py-4 border border-neutral-200 rounded-3xl focus:outline-none focus:border-[#ff4d4d] focus:ring-2 focus:ring-[#ff4d4d]/20 text-lg"
                            placeholder="••••••••" required>
                 </div>
 
+                <div class="flex items-center justify-between text-sm">
+                    <label class="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" class="w-4 h-4 accent-[#ff4d4d]">
+                        <span class="text-neutral-600">Remember me</span>
+                    </label>
+                    <a href="#" class="text-[#ff4d4d] hover:underline">Forgot password?</a>
+                </div>
+
                 <button type="submit"
-                        class="w-full bg-[#ff4d4d] hover:bg-[#e63f3f] text-white py-5 rounded-3xl font-semibold text-lg transition">
+                        class="w-full bg-[#ff4d4d] hover:bg-[#e63f3f] text-white py-5 rounded-3xl font-semibold text-lg transition flex items-center justify-center gap-2">
+                    <i class="fas fa-sign-in-alt"></i>
                     Login
                 </button>
             </form>
 
-            <p class="text-center text-sm text-neutral-500 mt-8">
-                Don't have an account? 
-                <a href="{{ url_for('register') }}" class="text-[#ff4d4d] font-semibold">Sign up</a>
-            </p>
+            <div class="mt-8 text-center">
+                <p class="text-neutral-500 text-sm">
+                    Don't have an account? 
+                    <a href="{{ url_for('register') }}" class="text-[#ff4d4d] font-semibold hover:underline">Sign up free</a>
+                </p>
+            </div>
         </div>
     </div>
 </body>
 </html>
+
+
 
